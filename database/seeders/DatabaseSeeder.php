@@ -15,11 +15,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $this->command->info('Iniciando proceso de seeding...');
+        
+        // Ejecutar seeders en orden específico para respetar las dependencias
+        $this->call([
+            UsuarioSeeder::class,
+            CategoriaSeeder::class,
+            ProductoSeeder::class,
+            MetodoPagoSeeder::class,
+            BancoVenezuelaSeeder::class,
+            BranchSeeder::class,
+            ProductoSucursalSeeder::class,
+            OrdenSeeder::class,
+            OrdenDetalleSeeder::class,
         ]);
+        
+        $this->command->info('Seeding completado exitosamente!');
+        $this->command->info('Credenciales de acceso:');
+        $this->command->info('Email: admin@restaurante.com');
+        $this->command->info('Password: password');
     }
 }
