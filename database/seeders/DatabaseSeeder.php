@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         
         // Ejecutar seeders en orden específico para respetar las dependencias
         $this->call([
+            RolePermissionSeeder::class, // Debe ejecutarse primero para crear roles y permisos
             UsuarioSeeder::class,
             CategoriaSeeder::class,
             ProductoSeeder::class,
