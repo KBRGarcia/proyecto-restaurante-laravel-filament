@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-use App\Models\Usuario;
+use App\Models\User;
 
 class RolePermissionSeeder extends Seeder
 {
@@ -14,6 +14,9 @@ class RolePermissionSeeder extends Seeder
      */
     public function run(): void
     {
+        // Limpiar caché de permisos antes de empezar
+        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+        
         // Crear permisos
         $permissions = [
             // Gestión de usuarios
@@ -76,8 +79,11 @@ class RolePermissionSeeder extends Seeder
         ];
 
         foreach ($permissions as $permission) {
-            Permission::create(['name' => $permission, 'guard_name' => 'web']);
+            Permission::firstOrCreate(['name' => $permission, 'guard_name' => 'web']);
         }
+        
+        // Limpiar caché después de crear permisos
+        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
         // Crear roles
         $roles = [
@@ -130,11 +136,22 @@ class RolePermissionSeeder extends Seeder
 
         foreach ($roles as $roleName => $rolePermissions) {
             $role = Role::create(['name' => $roleName, 'guard_name' => 'web']);
-            $role->givePermissionTo($rolePermissions);
+            
+            // Asignar permisos uno por uno con manejo de errores
+            foreach ($rolePermissions as $permissionName) {
+                try {
+                    $permission = Permission::findByName($permissionName, 'web');
+                    $role->givePermissionTo($permission);
+                } catch (\Exception $e) {
+                    $this->command->warn("Permiso '{$permissionName}' no encontrado. Verifique que existe en la base de datos.");
+                }
+            }
         }
 
         // Asignar roles a usuarios existentes (si los hay)
-        $this->assignRolesToExistingUsers();
+        // Esto se ejecuta al final, después de que UsuarioSeeder crea los usuarios
+        // Por lo tanto, comentamos esta línea ya que los seeders se ejecutarán después
+        // $this->assignRolesToExistingUsers();
     }
 
     /**
@@ -149,7 +166,7 @@ class RolePermissionSeeder extends Seeder
         ];
 
         foreach ($roleMapping as $oldRole => $newRole) {
-            $users = Usuario::where('rol', $oldRole)->get();
+            $users = User::where('rol', $oldRole)->get();
             foreach ($users as $user) {
                 $user->assignRole($newRole);
             }

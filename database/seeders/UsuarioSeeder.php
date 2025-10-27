@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Usuario;
+use App\Models\User; // Cambiamos Usuario por User
 use Illuminate\Support\Facades\Hash;
 
 class UsuarioSeeder extends Seeder
@@ -14,8 +14,8 @@ class UsuarioSeeder extends Seeder
      */
     public function run(): void
     {
-        // Usuario administrador por defecto
-        $admin = Usuario::create([
+        // Usuario administrador por defecto (para Filament)
+        $admin = User::create([
             'nombre' => 'Admin',
             'apellido' => 'Principal',
             'correo' => 'admin@restaurante.com',
@@ -23,11 +23,12 @@ class UsuarioSeeder extends Seeder
             'rol' => 'admin',
             'estado' => 'activo',
             'fecha_registro' => now(),
+            'email_verified_at' => now(),
         ]);
-        $admin->assignRole('admin');
+        $admin->assignRole('super-admin');
 
         // Usuario super administrador
-        $superAdmin = Usuario::create([
+        $superAdmin = User::create([
             'nombre' => 'Super',
             'apellido' => 'Admin',
             'correo' => 'superadmin@restaurante.com',
@@ -35,11 +36,12 @@ class UsuarioSeeder extends Seeder
             'rol' => 'admin',
             'estado' => 'activo',
             'fecha_registro' => now(),
+            'email_verified_at' => now(),
         ]);
         $superAdmin->assignRole('super-admin');
 
         // Usuario gerente
-        $gerente = Usuario::create([
+        $gerente = User::create([
             'nombre' => 'Gerente',
             'apellido' => 'Principal',
             'correo' => 'gerente@restaurante.com',
@@ -49,11 +51,12 @@ class UsuarioSeeder extends Seeder
             'rol' => 'admin',
             'estado' => 'activo',
             'fecha_registro' => now(),
+            'email_verified_at' => now(),
         ]);
         $gerente->assignRole('gerente');
 
         // Usuario empleado
-        $empleado = Usuario::create([
+        $empleado = User::create([
             'nombre' => 'Empleado',
             'apellido' => 'Principal',
             'correo' => 'empleado@restaurante.com',
@@ -63,6 +66,7 @@ class UsuarioSeeder extends Seeder
             'rol' => 'empleado',
             'estado' => 'activo',
             'fecha_registro' => now(),
+            'email_verified_at' => now(),
         ]);
         $empleado->assignRole('empleado');
 
@@ -121,7 +125,7 @@ class UsuarioSeeder extends Seeder
         ];
 
         foreach ($usuarios as $usuarioData) {
-            $usuario = Usuario::create(array_merge($usuarioData, [
+            $usuario = User::create(array_merge($usuarioData, [
                 'password' => Hash::make('password'),
             ]));
             $usuario->assignRole('cliente');

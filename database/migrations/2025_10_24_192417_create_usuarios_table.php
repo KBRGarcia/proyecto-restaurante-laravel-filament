@@ -24,6 +24,8 @@ return new class extends Migration
             $table->enum('estado', ['activo', 'inactivo'])->default('activo');
             $table->timestamp('fecha_registro')->useCurrent();
             $table->timestamp('ultima_conexion')->nullable();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->rememberToken();
             $table->timestamps();
         });
     }
