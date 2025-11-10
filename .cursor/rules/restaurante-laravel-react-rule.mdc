@@ -1,0 +1,82 @@
+---
+alwaysApply: true
+---
+
+# Restaurant Laravel React Project Rules
+
+## Documentation and Sources
+
+- Always use official documentation and/or certified sources.
+- Always use the official documentation for React 19, Laravel 12, and Inertia.js 2.0.
+- Always verify information before implementing it.
+
+## Best Practices
+
+- Always follow programming best practices.
+- Maintain clean, readable, and well-structured code.
+- Apply SOLID principles and appropriate design patterns.
+
+## Technology Stack
+
+### Backend
+- Programming language: PHP 8.2
+- Framework: Laravel 12
+- Frontend integration: Inertia.js 2.0
+
+### Frontend
+- Framework: React 19
+- Backend integration: Inertia.js 2.0
+
+## General Considerations
+
+- Verify compatibility between versions of the technologies used.
+- Prioritize official and documented solutions over third-party solutions.
+- Maintain code consistency and follow project standards.
+
+## Commit Message Convention
+
+Always use **Conventional Commits** format for commit messages:
+
+### Format
+
+```
+<type>(<scope(optional)>): <short description>
+
+<detailed description(optional)>
+```
+
+### Types
+
+- **feat**: New features in the code
+- **fix**: Bug fixes ONLY
+- **refactor**: Code structure improvements (code readability, simplify complex logic, remove duplicate code, change file structure, update syntax to new standards)
+- **perf**: Performance improvements (such as optimized queries)
+- **chore**: Dependency updates, changes in .gitignore and configuration files (such as .env)
+- **docs**: Changes in code documentation, readme, or typographical errors
+- **style**: Code formatting and style
+- **test**: Additions or modifications of tests
+- **build**: Changes in build system that significantly affect the project (composer or package)
+- **revert**: Revert a previous commit
+
+### Scope
+
+Examples: `resources`, `migrations`, `models`, `adminpanel`, `factory`, `policies`, `api`, `relationmanager`, etc.
+
+### Examples
+
+- `feat(migration): add cedula column to persons table`
+- `fix(model): error in validations in institution`
+- `refactor(resource): improved select logic in authority`
+- `perf(resource): use relationship instead of options in infrastructure`
+- `chore(shield): updated shield plugin from version x to version y`
+- `docs(readme): updated commands to deploy project to production`
+- `style(menu): added background, reduced spaces and changed menu scrollbar`
+- `build(composer): added audits plugin`
+- `revert: alfredo messed up`
+
+### Most Common Types
+
+- **feat**: For new features in the code
+- **fix**: To fix errors
+- **refactor**: For improvements and code readability
+- **perf**: Performance improvements
