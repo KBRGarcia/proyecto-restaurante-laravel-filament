@@ -72,11 +72,19 @@ class User extends Authenticatable
         $rules = [
             'name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:255'],
             'phone_number' => ['nullable', 'string', 'max:20'],
             'address' => ['nullable', 'string'],
-            'profile_picture' => ['nullable', 'string', 'max:255'],
+            'profile_picture' => ['nullable', 'image', 'max:2048'], // 2MB max
+            'role' => ['required', 'string', 'in:admin,employee,client'],
+            'status' => ['required', 'string', 'in:active,inactive'],
         ];
+
+        // Email validation: unique for creation, basic validation for update (ignore handled in controller)
+        if ($isUpdate) {
+            $rules['email'] = ['required', 'email', 'max:255'];
+        } else {
+            $rules['email'] = ['required', 'email', 'max:255', 'unique:users,email'];
+        }
 
         // Password validation: 8-16 characters, at least one uppercase, one number, and one special character
         if ($isUpdate) {
@@ -112,17 +120,27 @@ class User extends Authenticatable
         return [
             'name.required' => 'El nombre es obligatorio.',
             'name.string' => 'El nombre debe ser una cadena de texto.',
+            'name.max' => 'El nombre no debe exceder los 255 caracteres.',
             'last_name.required' => 'El apellido es obligatorio.',
             'last_name.string' => 'El apellido debe ser una cadena de texto.',
+            'last_name.max' => 'El apellido no debe exceder los 255 caracteres.',
             'email.required' => 'El correo electrónico es obligatorio.',
             'email.email' => 'El correo electrónico debe ser válido.',
+            'email.unique' => 'Este correo electrónico ya está registrado.',
+            'email.max' => 'El correo electrónico no debe exceder los 255 caracteres.',
             'password.required' => 'La contraseña es obligatoria.',
             'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
             'password.max' => 'La contraseña no debe exceder los 16 caracteres.',
             'password.regex' => 'La contraseña debe contener al menos una mayúscula, un número y un carácter especial (@$!%*?&#).',
             'phone_number.string' => 'El número de teléfono debe ser una cadena de texto.',
+            'phone_number.max' => 'El número de teléfono no debe exceder los 20 caracteres.',
             'address.string' => 'La dirección debe ser una cadena de texto.',
-            'profile_picture.string' => 'La foto de perfil debe ser una cadena de texto.',
+            'profile_picture.image' => 'La foto de perfil debe ser una imagen.',
+            'profile_picture.max' => 'La foto de perfil no debe exceder los 2MB.',
+            'role.required' => 'El rol es obligatorio.',
+            'role.in' => 'El rol seleccionado no es válido.',
+            'status.required' => 'El estado es obligatorio.',
+            'status.in' => 'El estado seleccionado no es válido.',
         ];
     }
 }

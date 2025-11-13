@@ -105,7 +105,7 @@ class UserController extends Controller
     public function show(User $user)
     {
         return Inertia::render('users/show', [
-            'user' => new UserResource($user),
+            'user' => (new UserResource($user))->resolve(),
         ]);
     }
 
@@ -115,7 +115,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         return Inertia::render('users/edit', [
-            'user' => new UserResource($user),
+            'user' => (new UserResource($user))->resolve(),
             'fields' => UserResource::formFields(),
         ]);
     }
@@ -128,7 +128,7 @@ class UserController extends Controller
         $rules = User::rules(true);
         
         // Agregar validación de email único excepto el usuario actual
-        $rules['email'][] = Rule::ignore($user->id);
+        $rules['email'] = ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)];
 
         $validated = $request->validate($rules, User::messages());
 
