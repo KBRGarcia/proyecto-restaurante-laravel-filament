@@ -13,9 +13,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Ejecutar el seeder de usuarios
+        // Ejecutar los seeders en el orden correcto
+        // Importante: CategorySeeder debe ejecutarse antes que ProductSeeder
+        // debido a la relación de foreign key
         $this->call([
             UserSeeder::class,
+            CategorySeeder::class,
+            ProductSeeder::class,
         ]);
     }
 }
