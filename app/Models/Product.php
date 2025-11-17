@@ -158,4 +158,54 @@ class Product extends Model
     {
         return $this->is_special;
     }
+
+    /**
+     * Get the validation rules for the Product model.
+     *
+     * @param bool $isUpdate Whether the validation is for an update operation
+     * @return array<string, string|array>
+     */
+    public static function rules(bool $isUpdate = false): array
+    {
+        return [
+            'name' => ['required', 'string', 'max:100'],
+            'description' => ['nullable', 'string'],
+            'price' => ['required', 'numeric', 'min:0', 'regex:/^\d+(\.\d{1,2})?$/'],
+            'category_id' => ['nullable', 'exists:categories,id'],
+            'image' => ['nullable', 'image', 'max:2048'], // 2MB max
+            'status' => ['required', 'string', 'in:active,inactive,out of stock'],
+            'preparation_time' => ['required', 'integer', 'min:1'],
+            'ingredients' => ['nullable', 'string'],
+            'is_special' => ['nullable', 'boolean'],
+        ];
+    }
+
+    /**
+     * Get custom validation messages.
+     *
+     * @return array<string, string>
+     */
+    public static function messages(): array
+    {
+        return [
+            'name.required' => 'El nombre es obligatorio.',
+            'name.string' => 'El nombre debe ser una cadena de texto.',
+            'name.max' => 'El nombre no debe exceder los 100 caracteres.',
+            'description.string' => 'La descripción debe ser una cadena de texto.',
+            'price.required' => 'El precio es obligatorio.',
+            'price.numeric' => 'El precio debe ser un número.',
+            'price.min' => 'El precio debe ser mayor o igual a 0.',
+            'price.regex' => 'El precio debe tener como máximo 2 decimales.',
+            'category_id.exists' => 'La categoría seleccionada no existe.',
+            'image.image' => 'La imagen debe ser un archivo de imagen válido.',
+            'image.max' => 'La imagen no debe exceder los 2MB.',
+            'status.required' => 'El estado es obligatorio.',
+            'status.in' => 'El estado seleccionado no es válido.',
+            'preparation_time.required' => 'El tiempo de preparación es obligatorio.',
+            'preparation_time.integer' => 'El tiempo de preparación debe ser un número entero.',
+            'preparation_time.min' => 'El tiempo de preparación debe ser al menos 1 minuto.',
+            'ingredients.string' => 'Los ingredientes deben ser una cadena de texto.',
+            'is_special.boolean' => 'El campo especial debe ser verdadero o falso.',
+        ];
+    }
 }

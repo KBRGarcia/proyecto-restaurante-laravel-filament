@@ -76,3 +76,35 @@ export interface Pagination {
     from: number | null;
     to: number | null;
 }
+
+export interface Category {
+    id: number;
+    name: string;
+    description: string | null;
+    image: string | null;
+    status: 'active' | 'inactive';
+    status_label: string;
+    order_show: number;
+    created_at: string;
+    updated_at: string;
+    [key: string]: unknown;
+}
+
+export interface Product {
+    id: number;
+    name: string;
+    description: string | null;
+    price: string;
+    category_id: number | null;
+    category_name: string | null;
+    image: string | null;
+    status: 'active' | 'inactive' | 'out of stock';
+    status_label: string;
+    preparation_time: number;
+    ingredients: string | null;
+    is_special: boolean;
+    creation_date: string | null;
+    created_at: string;
+    updated_at: string;
+    [key: string]: unknown;
+}

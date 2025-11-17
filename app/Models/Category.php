@@ -101,4 +101,43 @@ class Category extends Model
     {
         return $this->status === self::STATUS_INACTIVE;
     }
+
+    /**
+     * Get the validation rules for the Category model.
+     *
+     * @param bool $isUpdate Whether the validation is for an update operation
+     * @return array<string, string|array>
+     */
+    public static function rules(bool $isUpdate = false): array
+    {
+        return [
+            'name' => ['required', 'string', 'max:100'],
+            'description' => ['nullable', 'string'],
+            'image' => ['nullable', 'image', 'max:2048'], // 2MB max
+            'status' => ['required', 'string', 'in:active,inactive'],
+            'order_show' => ['required', 'integer', 'min:0'],
+        ];
+    }
+
+    /**
+     * Get custom validation messages.
+     *
+     * @return array<string, string>
+     */
+    public static function messages(): array
+    {
+        return [
+            'name.required' => 'El nombre es obligatorio.',
+            'name.string' => 'El nombre debe ser una cadena de texto.',
+            'name.max' => 'El nombre no debe exceder los 100 caracteres.',
+            'description.string' => 'La descripción debe ser una cadena de texto.',
+            'image.image' => 'La imagen debe ser un archivo de imagen válido.',
+            'image.max' => 'La imagen no debe exceder los 2MB.',
+            'status.required' => 'El estado es obligatorio.',
+            'status.in' => 'El estado seleccionado no es válido.',
+            'order_show.required' => 'El orden de visualización es obligatorio.',
+            'order_show.integer' => 'El orden de visualización debe ser un número entero.',
+            'order_show.min' => 'El orden de visualización debe ser mayor o igual a 0.',
+        ];
+    }
 }
