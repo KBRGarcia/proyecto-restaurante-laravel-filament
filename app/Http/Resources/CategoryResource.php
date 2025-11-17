@@ -117,14 +117,11 @@ class CategoryResource extends JsonResource
             [
                 'name' => 'status',
                 'label' => 'Estado',
-                'type' => 'select',
-                'placeholder' => 'Seleccione el estado',
+                'type' => 'switch',
+                'placeholder' => '',
                 'required' => true,
                 'validation' => 'required|in:active,inactive',
-                'options' => [
-                    ['value' => 'active', 'label' => 'Activo'],
-                    ['value' => 'inactive', 'label' => 'Inactivo'],
-                ],
+                'help_text' => 'Activa o desactiva la categoría',
                 'default' => 'active',
                 'grid_cols' => 6,
             ],

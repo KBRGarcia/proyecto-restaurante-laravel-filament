@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { Switch } from '@/components/ui/switch';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { AlertCircle, ArrowLeft, Save, Edit as EditIcon } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -215,6 +216,33 @@ export default function CategoryEdit({ category, fields }: CategoryEditProps) {
                                 </option>
                             ))}
                         </select>
+                        {errors[field.name as keyof typeof errors] && (
+                            <p className="text-sm text-destructive mt-1">
+                                {errors[field.name as keyof typeof errors]}
+                            </p>
+                        )}
+                    </div>
+                );
+
+            case 'switch':
+                return (
+                    <div key={field.name} className={gridClass}>
+                        <div className="flex items-center justify-between space-x-2">
+                            <div className="flex-1">
+                                <Label htmlFor={field.name} className="text-base">
+                                    {field.label}
+                                    {field.required && <span className="text-destructive ml-1">*</span>}
+                                </Label>
+                                {field.help_text && (
+                                    <p className="text-sm text-muted-foreground">{field.help_text}</p>
+                                )}
+                            </div>
+                            <Switch
+                                id={field.name}
+                                checked={value === 'active'}
+                                onCheckedChange={(checked: boolean) => setData(field.name as any, checked ? 'active' : 'inactive')}
+                            />
+                        </div>
                         {errors[field.name as keyof typeof errors] && (
                             <p className="text-sm text-destructive mt-1">
                                 {errors[field.name as keyof typeof errors]}
