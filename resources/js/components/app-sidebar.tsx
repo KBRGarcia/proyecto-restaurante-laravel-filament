@@ -15,12 +15,31 @@ import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
 import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
 import AppLogo from './app-logo';
+import users from '@/routes/users';
+import categories from '@/routes/categories';
+import products from '@/routes/products';
+import { Users, Tag, Package } from 'lucide-react';
 
 const mainNavItems: NavItem[] = [
     {
         title: 'Dashboard',
         href: dashboard(),
         icon: LayoutGrid,
+    },
+    {
+        title: 'Usuarios',
+        href: users.index(),
+        icon: Users,
+    },
+    {
+        title: 'Categorías',
+        href: categories.index(),
+        icon: Tag,
+    },
+    {
+        title: 'Productos',
+        href: products.index(),
+        icon: Package,
     },
 ];
 
