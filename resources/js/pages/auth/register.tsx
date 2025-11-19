@@ -39,18 +39,18 @@ export default function Register() {
     return (
         <>
             <Head title="Registro" />
-            <div className="flex min-h-screen flex-col items-center bg-[#FDFDFC] p-6 text-[#1b1b18] lg:justify-center lg:p-8 dark:bg-[#0a0a0a]">
+            <div className="flex min-h-screen flex-col items-center bg-background p-6 text-foreground lg:justify-center lg:p-8">
                 <header className="mb-6 w-full max-w-[500px] text-sm lg:max-w-xl">
                     <nav className="flex items-center justify-between gap-4">
                         {/* Back Button */}
                         <button
                             onClick={goBack}
-                            className="group relative inline-flex h-10 w-10 items-center justify-center rounded-lg border border-[#19140035] bg-white transition-all duration-300 hover:border-[#dc2626] hover:shadow-md dark:border-[#3E3E3A] dark:bg-[#0a0a0a] dark:hover:border-[#7f1d1d]"
+                            className="group relative inline-flex h-10 w-10 items-center justify-center rounded-lg border border-input bg-card transition-all duration-300 hover:border-primary hover:shadow-md"
                             aria-label="Volver"
                             title="Volver a la página anterior"
                         >
                             <svg
-                                className="h-5 w-5 text-[#1b1b18] transition-colors duration-300 group-hover:text-[#dc2626] dark:text-[#EDEDEC] dark:group-hover:text-[#7f1d1d]"
+                                className="h-5 w-5 text-foreground transition-colors duration-300 group-hover:text-primary"
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 stroke="currentColor"
@@ -69,7 +69,7 @@ export default function Register() {
                             {/* Home Link */}
                             <Link
                                 href={home()}
-                                className="inline-block rounded-sm border border-transparent px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#19140035] dark:text-[#EDEDEC] dark:hover:border-[#3E3E3A]"
+                                className="inline-block rounded-sm border border-transparent px-5 py-1.5 text-sm leading-normal text-foreground hover:border-input"
                             >
                                 Inicio
                             </Link>
@@ -77,13 +77,13 @@ export default function Register() {
                             {/* Theme Toggle Button */}
                             <button
                                 onClick={toggleTheme}
-                                className="group relative inline-flex h-10 w-10 items-center justify-center rounded-lg border border-[#19140035] bg-white transition-all duration-300 hover:border-[#dc2626] hover:shadow-md dark:border-[#3E3E3A] dark:bg-[#0a0a0a] dark:hover:border-[#7f1d1d]"
+                                className="group relative inline-flex h-10 w-10 items-center justify-center rounded-lg border border-input bg-card transition-all duration-300 hover:border-primary hover:shadow-md"
                                 aria-label="Cambiar tema"
                                 title={theme === 'light' ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro'}
                             >
                                 {/* Sun Icon (visible in dark mode) */}
                                 <svg
-                                    className="absolute h-5 w-5 rotate-0 scale-100 text-[#dc2626] transition-all duration-300 dark:-rotate-90 dark:scale-0 dark:text-[#7f1d1d]"
+                                    className="absolute h-5 w-5 rotate-0 scale-100 text-primary transition-all duration-300 dark:-rotate-90 dark:scale-0"
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke="currentColor"
@@ -98,7 +98,7 @@ export default function Register() {
                                 
                                 {/* Moon Icon (visible in light mode) */}
                                 <svg
-                                    className="absolute h-5 w-5 rotate-90 scale-0 text-[#dc2626] transition-all duration-300 dark:rotate-0 dark:scale-100 dark:text-[#7f1d1d]"
+                                    className="absolute h-5 w-5 rotate-90 scale-0 text-primary transition-all duration-300 dark:rotate-0 dark:scale-100"
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke="currentColor"
@@ -118,17 +118,17 @@ export default function Register() {
                 <div className="flex w-full items-center justify-center opacity-100 transition-opacity duration-750 lg:grow starting:opacity-0">
                     <main className="w-full max-w-[500px] lg:max-w-xl">
                         {/* Register Card */}
-                        <div className="overflow-hidden rounded-2xl bg-white shadow-xl transition-all duration-300 dark:bg-[#0a0a0a]">
+                        <div className="overflow-hidden rounded-2xl bg-card shadow-xl transition-all duration-300">
                             <div className="relative p-8 lg:p-12">
                                 {/* Decorative Element */}
-                                <div className="absolute right-0 top-0 h-32 w-32 translate-x-8 -translate-y-8 rounded-full bg-[#dc2626] opacity-10 dark:bg-[#7f1d1d]" />
+                                <div className="absolute right-0 top-0 h-32 w-32 translate-x-8 -translate-y-8 rounded-full bg-primary opacity-10" />
                                 
                                 <div className="relative">
                                     {/* Title Section */}
                                     <div className="mb-8 text-center">
-                                        <div className="mb-4 inline-flex rounded-xl bg-[#fee2e2] p-4 dark:bg-[#450a0a]">
+                                        <div className="mb-4 inline-flex rounded-xl bg-primary/10 p-4">
                                             <svg
-                                                className="h-8 w-8 text-[#dc2626] dark:text-[#dc2626]"
+                                                className="h-8 w-8 text-primary"
                                                 fill="none"
                                                 viewBox="0 0 24 24"
                                                 stroke="currentColor"
@@ -141,10 +141,10 @@ export default function Register() {
                                                 />
                                             </svg>
                                         </div>
-                                        <h1 className="mb-2 text-3xl font-bold text-[#1b1b18] dark:text-white">
+                                        <h1 className="mb-2 text-3xl font-bold text-foreground">
                                             Crear una cuenta
                                         </h1>
-                                        <p className="text-sm text-[#706f6c] dark:text-[#A1A09A]">
+                                        <p className="text-sm text-muted-foreground">
                                             Ingresa tus datos para crear tu cuenta
                                         </p>
                                     </div>
@@ -161,7 +161,7 @@ export default function Register() {
                                                 <div className="grid gap-6">
                                                     <div className="grid grid-cols-2 gap-4">
                                                         <div className="grid gap-2">
-                                                            <Label htmlFor="name" className="text-[#1b1b18] dark:text-[#EDEDEC]">
+                                                            <Label htmlFor="name">
                                                                 Nombre
                                                             </Label>
                                                             <Input
@@ -173,13 +173,12 @@ export default function Register() {
                                                                 autoComplete="given-name"
                                                                 name="name"
                                                                 placeholder="Juan"
-                                                                className="border-[#19140035] bg-[#FDFDFC] dark:border-[#3E3E3A] dark:bg-[#0a0a0a]"
                                                             />
                                                             <InputError message={errors.name} />
                                                         </div>
 
                                                         <div className="grid gap-2">
-                                                            <Label htmlFor="last_name" className="text-[#1b1b18] dark:text-[#EDEDEC]">
+                                                            <Label htmlFor="last_name">
                                                                 Apellido
                                                             </Label>
                                                             <Input
@@ -190,14 +189,13 @@ export default function Register() {
                                                                 autoComplete="family-name"
                                                                 name="last_name"
                                                                 placeholder="Pérez"
-                                                                className="border-[#19140035] bg-[#FDFDFC] dark:border-[#3E3E3A] dark:bg-[#0a0a0a]"
                                                             />
                                                             <InputError message={errors.last_name} />
                                                         </div>
                                                     </div>
 
                                                     <div className="grid gap-2">
-                                                        <Label htmlFor="email" className="text-[#1b1b18] dark:text-[#EDEDEC]">
+                                                        <Label htmlFor="email">
                                                             Correo electrónico
                                                         </Label>
                                                         <Input
@@ -208,15 +206,14 @@ export default function Register() {
                                                             autoComplete="email"
                                                             name="email"
                                                             placeholder="correo@ejemplo.com"
-                                                            className="border-[#19140035] bg-[#FDFDFC] dark:border-[#3E3E3A] dark:bg-[#0a0a0a]"
                                                         />
                                                         <InputError message={errors.email} />
                                                     </div>
 
                                                     <div className="grid gap-2">
-                                                        <Label htmlFor="phone_number" className="text-[#1b1b18] dark:text-[#EDEDEC]">
+                                                        <Label htmlFor="phone_number">
                                                             Teléfono{' '}
-                                                            <span className="text-xs text-[#706f6c] dark:text-[#A1A09A]">
+                                                            <span className="text-xs text-muted-foreground">
                                                                 (opcional)
                                                             </span>
                                                         </Label>
@@ -227,13 +224,12 @@ export default function Register() {
                                                             autoComplete="tel"
                                                             name="phone_number"
                                                             placeholder="+52 123 456 7890"
-                                                            className="border-[#19140035] bg-[#FDFDFC] dark:border-[#3E3E3A] dark:bg-[#0a0a0a]"
                                                         />
                                                         <InputError message={errors.phone_number} />
                                                     </div>
 
                                                     <div className="grid gap-2">
-                                                        <Label htmlFor="password" className="text-[#1b1b18] dark:text-[#EDEDEC]">
+                                                        <Label htmlFor="password">
                                                             Contraseña
                                                         </Label>
                                                         <Input
@@ -244,13 +240,12 @@ export default function Register() {
                                                             autoComplete="new-password"
                                                             name="password"
                                                             placeholder="Contraseña"
-                                                            className="border-[#19140035] bg-[#FDFDFC] dark:border-[#3E3E3A] dark:bg-[#0a0a0a]"
                                                         />
                                                         <InputError message={errors.password} />
                                                     </div>
 
                                                     <div className="grid gap-2">
-                                                        <Label htmlFor="password_confirmation" className="text-[#1b1b18] dark:text-[#EDEDEC]">
+                                                        <Label htmlFor="password_confirmation">
                                                             Confirmar contraseña
                                                         </Label>
                                                         <Input
@@ -261,7 +256,6 @@ export default function Register() {
                                                             autoComplete="new-password"
                                                             name="password_confirmation"
                                                             placeholder="Confirmar contraseña"
-                                                            className="border-[#19140035] bg-[#FDFDFC] dark:border-[#3E3E3A] dark:bg-[#0a0a0a]"
                                                         />
                                                         <InputError
                                                             message={errors.password_confirmation}
@@ -270,7 +264,7 @@ export default function Register() {
 
                                                     <Button
                                                         type="submit"
-                                                        className="mt-2 w-full bg-[#dc2626] text-white hover:bg-[#b91c1c] dark:bg-[#7f1d1d] dark:hover:bg-[#991b1b]"
+                                                        className="mt-2 w-full"
                                                         tabIndex={7}
                                                         data-test="register-user-button"
                                                     >
@@ -279,12 +273,12 @@ export default function Register() {
                                                     </Button>
                                                 </div>
 
-                                                <div className="text-center text-sm text-[#706f6c] dark:text-[#A1A09A]">
+                                                <div className="text-center text-sm text-muted-foreground">
                                                     ¿Ya tienes una cuenta?{' '}
                                                     <TextLink 
                                                         href={login()} 
                                                         tabIndex={8}
-                                                        className="font-semibold text-[#dc2626] hover:text-[#b91c1c] dark:text-[#dc2626] dark:hover:text-[#991b1b]"
+                                                        className="font-semibold text-primary hover:text-primary/80"
                                                     >
                                                         Iniciar sesión
                                                     </TextLink>

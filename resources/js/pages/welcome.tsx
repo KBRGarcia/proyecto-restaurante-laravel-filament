@@ -40,19 +40,19 @@ export default function Welcome({
                     rel="stylesheet"
                 />
             </Head>
-            <div className="flex min-h-screen flex-col items-center bg-[#FDFDFC] p-6 text-[#1b1b18] lg:justify-center lg:p-8 dark:bg-[#0a0a0a]">
+            <div className="flex min-h-screen flex-col items-center bg-background p-6 text-foreground lg:justify-center lg:p-8">
                 <header className="mb-6 w-full max-w-[335px] text-sm not-has-[nav]:hidden lg:max-w-4xl">
                     <nav className="flex items-center justify-between gap-4">
                         {/* Theme Toggle Button */}
                         <button
                             onClick={toggleTheme}
-                            className="group relative inline-flex h-10 w-10 items-center justify-center rounded-lg border border-[#19140035] bg-white transition-all duration-300 hover:border-[#dc2626] hover:shadow-md dark:border-[#3E3E3A] dark:bg-[#0a0a0a] dark:hover:border-[#7f1d1d]"
+                            className="group relative inline-flex h-10 w-10 items-center justify-center rounded-lg border border-input bg-card transition-all duration-300 hover:border-primary hover:shadow-md"
                             aria-label="Cambiar tema"
                             title={theme === 'light' ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro'}
                         >
                             {/* Sun Icon (visible in dark mode) */}
                             <svg
-                                className="absolute h-5 w-5 rotate-0 scale-100 text-[#dc2626] transition-all duration-300 dark:-rotate-90 dark:scale-0 dark:text-[#7f1d1d]"
+                                className="absolute h-5 w-5 rotate-0 scale-100 text-primary transition-all duration-300 dark:-rotate-90 dark:scale-0"
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 stroke="currentColor"
@@ -67,7 +67,7 @@ export default function Welcome({
                             
                             {/* Moon Icon (visible in light mode) */}
                             <svg
-                                className="absolute h-5 w-5 rotate-90 scale-0 text-[#dc2626] transition-all duration-300 dark:rotate-0 dark:scale-100 dark:text-[#7f1d1d]"
+                                className="absolute h-5 w-5 rotate-90 scale-0 text-primary transition-all duration-300 dark:rotate-0 dark:scale-100"
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 stroke="currentColor"
@@ -86,7 +86,7 @@ export default function Welcome({
                             {auth.user ? (
                                 <Link
                                     href={dashboard()}
-                                    className="inline-block rounded-sm border border-[#19140035] px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#1915014a] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:hover:border-[#62605b]"
+                                    className="inline-block rounded-sm border border-input px-5 py-1.5 text-sm leading-normal text-foreground hover:border-muted-foreground"
                                 >
                                     Dashboard
                                 </Link>
@@ -94,14 +94,14 @@ export default function Welcome({
                                 <>
                                     <Link
                                         href={login()}
-                                        className="inline-block rounded-sm border border-transparent px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#19140035] dark:text-[#EDEDEC] dark:hover:border-[#3E3E3A]"
+                                        className="inline-block rounded-sm border border-transparent px-5 py-1.5 text-sm leading-normal text-foreground hover:border-input"
                                     >
                                         Log in
                                     </Link>
                                     {canRegister && (
                                         <Link
                                             href={register()}
-                                            className="inline-block rounded-sm border border-[#19140035] px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#1915014a] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:hover:border-[#62605b]"
+                                            className="inline-block rounded-sm border border-input px-5 py-1.5 text-sm leading-normal text-foreground hover:border-muted-foreground"
                                         >
                                             Register
                                         </Link>
@@ -115,10 +115,10 @@ export default function Welcome({
                     <main className="flex w-full max-w-7xl flex-col gap-12 px-6 py-12 lg:py-20">
                         {/* Hero Section */}
                         <div className="text-center">
-                            <h1 className="mb-4 text-5xl font-bold text-[#1b1b18] lg:text-7xl dark:text-white">
+                            <h1 className="mb-4 text-5xl font-bold text-foreground lg:text-7xl">
                                 Sabor & Tradición
                             </h1>
-                            <p className="mx-auto max-w-2xl text-lg text-[#706f6c] lg:text-xl dark:text-[#A1A09A]">
+                            <p className="mx-auto max-w-2xl text-lg text-muted-foreground lg:text-xl">
                                 Sistema de gestión administrativa para tu restaurante.
                                 Optimiza tus operaciones de entrega y manejo de pedidos.
                             </p>
@@ -127,13 +127,13 @@ export default function Welcome({
                         {/* Services Section */}
                         <div className="grid gap-6 md:grid-cols-2 lg:gap-8">
                             {/* Para Llevar Card */}
-                            <div className="group relative overflow-hidden rounded-2xl bg-white p-8 shadow-lg transition-all duration-300 hover:shadow-xl lg:p-12 dark:bg-[#0a0a0a]">
-                                <div className="absolute right-0 top-0 h-32 w-32 translate-x-8 -translate-y-8 rounded-full bg-[#dc2626] opacity-10 transition-transform duration-300 group-hover:scale-150 dark:bg-[#7f1d1d]" />
+                            <div className="group relative overflow-hidden rounded-2xl bg-card p-8 shadow-lg transition-all duration-300 hover:shadow-xl lg:p-12">
+                                <div className="absolute right-0 top-0 h-32 w-32 translate-x-8 -translate-y-8 rounded-full bg-primary opacity-10 transition-transform duration-300 group-hover:scale-150" />
                                 
                                 <div className="relative">
-                                    <div className="mb-6 inline-flex rounded-xl bg-[#fee2e2] p-4 dark:bg-[#450a0a]">
+                                    <div className="mb-6 inline-flex rounded-xl bg-primary/10 p-4">
                                         <svg
-                                            className="h-8 w-8 text-[#dc2626] dark:text-[#dc2626]"
+                                            className="h-8 w-8 text-primary"
                                             fill="none"
                                             viewBox="0 0 24 24"
                                             stroke="currentColor"
@@ -147,11 +147,11 @@ export default function Welcome({
                                         </svg>
                                     </div>
                                     
-                                    <h2 className="mb-3 text-2xl font-bold text-[#1b1b18] dark:text-white">
+                                    <h2 className="mb-3 text-2xl font-bold text-foreground">
                                         Para Llevar
                                     </h2>
                                     
-                                    <p className="mb-6 text-[#706f6c] dark:text-[#A1A09A]">
+                                    <p className="mb-6 text-muted-foreground">
                                         Gestiona los pedidos para recoger en el establecimiento. 
                                         Control completo del inventario, tiempos de preparación y estado de los pedidos.
                                     </p>
@@ -159,7 +159,7 @@ export default function Welcome({
                                     <ul className="space-y-2">
                                         <li className="flex items-start gap-2">
                                             <svg
-                                                className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#dc2626] dark:text-[#dc2626]"
+                                                className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary"
                                                 fill="currentColor"
                                                 viewBox="0 0 20 20"
                                             >
@@ -169,29 +169,13 @@ export default function Welcome({
                                                     clipRule="evenodd"
                                                 />
                                             </svg>
-                                            <span className="text-sm text-[#1b1b18] dark:text-[#EDEDEC]">
+                                            <span className="text-sm text-foreground">
                                                 Control de pedidos en tiempo real
-                                    </span>
-                                </li>
-                                        <li className="flex items-start gap-2">
-                                            <svg
-                                                className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#dc2626] dark:text-[#dc2626]"
-                                                fill="currentColor"
-                                                viewBox="0 0 20 20"
-                                            >
-                                                <path
-                                                    fillRule="evenodd"
-                                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                                    clipRule="evenodd"
-                                                />
-                                            </svg>
-                                            <span className="text-sm text-[#1b1b18] dark:text-[#EDEDEC]">
-                                                Notificaciones automáticas
-                                        </span>
+                                            </span>
                                         </li>
                                         <li className="flex items-start gap-2">
                                             <svg
-                                                className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#dc2626] dark:text-[#dc2626]"
+                                                className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary"
                                                 fill="currentColor"
                                                 viewBox="0 0 20 20"
                                             >
@@ -201,22 +185,38 @@ export default function Welcome({
                                                     clipRule="evenodd"
                                                 />
                                             </svg>
-                                            <span className="text-sm text-[#1b1b18] dark:text-[#EDEDEC]">
+                                            <span className="text-sm text-foreground">
+                                                Notificaciones automáticas
+                                            </span>
+                                        </li>
+                                        <li className="flex items-start gap-2">
+                                            <svg
+                                                className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary"
+                                                fill="currentColor"
+                                                viewBox="0 0 20 20"
+                                            >
+                                                <path
+                                                    fillRule="evenodd"
+                                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                                    clipRule="evenodd"
+                                                />
+                                            </svg>
+                                            <span className="text-sm text-foreground">
                                                 Historial de transacciones
-                                    </span>
-                                </li>
+                                            </span>
+                                        </li>
                             </ul>
                                 </div>
                         </div>
 
                             {/* A Domicilio Card */}
-                            <div className="group relative overflow-hidden rounded-2xl bg-white p-8 shadow-lg transition-all duration-300 hover:shadow-xl lg:p-12 dark:bg-[#0a0a0a]">
-                                <div className="absolute right-0 top-0 h-32 w-32 translate-x-8 -translate-y-8 rounded-full bg-[#dc2626] opacity-10 transition-transform duration-300 group-hover:scale-150 dark:bg-[#7f1d1d]" />
+                            <div className="group relative overflow-hidden rounded-2xl bg-card p-8 shadow-lg transition-all duration-300 hover:shadow-xl lg:p-12">
+                                <div className="absolute right-0 top-0 h-32 w-32 translate-x-8 -translate-y-8 rounded-full bg-primary opacity-10 transition-transform duration-300 group-hover:scale-150" />
                                 
                                 <div className="relative">
-                                    <div className="mb-6 inline-flex rounded-xl bg-[#fee2e2] p-4 dark:bg-[#450a0a]">
+                                    <div className="mb-6 inline-flex rounded-xl bg-primary/10 p-4">
                                         <svg
-                                            className="h-8 w-8 text-[#dc2626] dark:text-[#dc2626]"
+                                            className="h-8 w-8 text-primary"
                                 fill="none"
                                             viewBox="0 0 24 24"
                                             stroke="currentColor"
@@ -233,11 +233,11 @@ export default function Welcome({
                                         </svg>
                                     </div>
                                     
-                                    <h2 className="mb-3 text-2xl font-bold text-[#1b1b18] dark:text-white">
+                                    <h2 className="mb-3 text-2xl font-bold text-foreground">
                                         A Domicilio
                                     </h2>
                                     
-                                    <p className="mb-6 text-[#706f6c] dark:text-[#A1A09A]">
+                                    <p className="mb-6 text-muted-foreground">
                                         Administra entregas a domicilio de manera eficiente. 
                                         Seguimiento en tiempo real, asignación de repartidores y optimización de rutas.
                                     </p>
@@ -245,49 +245,49 @@ export default function Welcome({
                                     <ul className="space-y-2">
                                         <li className="flex items-start gap-2">
                                             <svg
-                                                className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#dc2626] dark:text-[#dc2626]"
-                                    fill="currentColor"
+                                                className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary"
+                                                fill="currentColor"
                                                 viewBox="0 0 20 20"
                                             >
-                                <path
+                                                <path
                                                     fillRule="evenodd"
                                                     d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
                                                     clipRule="evenodd"
-                                />
-                            </svg>
-                                            <span className="text-sm text-[#1b1b18] dark:text-[#EDEDEC]">
+                                                />
+                                            </svg>
+                                            <span className="text-sm text-foreground">
                                                 Gestión de repartidores
                                             </span>
                                         </li>
                                         <li className="flex items-start gap-2">
                                             <svg
-                                                className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#dc2626] dark:text-[#dc2626]"
+                                                className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary"
                                                 fill="currentColor"
                                                 viewBox="0 0 20 20"
-                                >
-                                    <path
+                                            >
+                                                <path
                                                     fillRule="evenodd"
                                                     d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
                                                     clipRule="evenodd"
                                                 />
                                             </svg>
-                                            <span className="text-sm text-[#1b1b18] dark:text-[#EDEDEC]">
+                                            <span className="text-sm text-foreground">
                                                 Seguimiento GPS en tiempo real
                                             </span>
                                         </li>
                                         <li className="flex items-start gap-2">
                                             <svg
-                                                className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#dc2626] dark:text-[#dc2626]"
+                                                className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary"
                                                 fill="currentColor"
                                                 viewBox="0 0 20 20"
-                                >
-                                    <path
+                                            >
+                                                <path
                                                     fillRule="evenodd"
                                                     d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
                                                     clipRule="evenodd"
                                                 />
                                             </svg>
-                                            <span className="text-sm text-[#1b1b18] dark:text-[#EDEDEC]">
+                                            <span className="text-sm text-foreground">
                                                 Cálculo automático de tiempos
                                             </span>
                                         </li>
@@ -297,7 +297,7 @@ export default function Welcome({
                         </div>
 
                         {/* Features Section */}
-                        <div className="rounded-2xl bg-gradient-to-br from-[#dc2626] to-[#b91c1c] p-8 text-white shadow-xl lg:p-12 dark:from-[#7f1d1d] dark:to-[#450a0a]">
+                        <div className="rounded-2xl bg-gradient-to-br from-primary to-primary/80 p-8 text-primary-foreground shadow-xl lg:p-12">
                             <div className="mx-auto max-w-4xl text-center">
                                 <h3 className="mb-4 text-3xl font-bold">
                                     Panel Administrativo Completo
@@ -327,10 +327,10 @@ export default function Welcome({
                                         </p>
                                     </div>
                                     
-                                    <div className="rounded-xl bg-white/10 p-6 backdrop-blur-sm">
+                                    <div className="feature-box">
                                         <svg
-                                            className="mx-auto mb-3 h-10 w-10"
-                                fill="none"
+                                            className="feature-box-icon"
+                                            fill="none"
                                             viewBox="0 0 24 24"
                                             stroke="currentColor"
                                             strokeWidth={2}
@@ -347,9 +347,9 @@ export default function Welcome({
                                         </p>
                                     </div>
                                     
-                                    <div className="rounded-xl bg-white/10 p-6 backdrop-blur-sm">
+                                    <div className="feature-box">
                                         <svg
-                                            className="mx-auto mb-3 h-10 w-10"
+                                            className="feature-box-icon"
                                             fill="none"
                                             viewBox="0 0 24 24"
                                             stroke="currentColor"
