@@ -33,7 +33,7 @@ export default function Welcome({
 
     return (
         <>
-            <Head title="Welcome">
+            <Head title="Sabor & Tradición">
                 <link rel="preconnect" href="https://fonts.bunny.net" />
                 <link
                     href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600"
@@ -327,9 +327,9 @@ export default function Welcome({
                                         </p>
                                     </div>
                                     
-                                    <div className="feature-box">
+                                    <div className="rounded-xl bg-white/10 p-6 backdrop-blur-sm">
                                         <svg
-                                            className="feature-box-icon"
+                                            className="mx-auto mb-3 h-10 w-10"
                                             fill="none"
                                             viewBox="0 0 24 24"
                                             stroke="currentColor"
@@ -347,9 +347,9 @@ export default function Welcome({
                                         </p>
                                     </div>
                                     
-                                    <div className="feature-box">
+                                    <div className="rounded-xl bg-white/10 p-6 backdrop-blur-sm">
                                         <svg
-                                            className="feature-box-icon"
+                                            className="mx-auto mb-3 h-10 w-10"
                                             fill="none"
                                             viewBox="0 0 24 24"
                                             stroke="currentColor"
