@@ -13,12 +13,12 @@ import {
 import { dashboard } from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
+import { BookOpen, Folder, LayoutGrid, Users, Tag, Package, ShoppingCart, Settings, Store, Receipt } from 'lucide-react';
 import AppLogo from './app-logo';
 import users from '@/routes/users';
 import categories from '@/routes/categories';
 import products from '@/routes/products';
-import { Users, Tag, Package } from 'lucide-react';
+import orders from '@/routes/orders';
 
 const mainNavItems: NavItem[] = [
     {
@@ -27,19 +27,45 @@ const mainNavItems: NavItem[] = [
         icon: LayoutGrid,
     },
     {
-        title: 'Usuarios',
-        href: users.index(),
-        icon: Users,
+        title: 'Administración',
+        href: users.index(), // Href por defecto (no se usa cuando hay subitems)
+        icon: Settings,
+        items: [
+            {
+                title: 'Usuarios',
+                href: users.index(),
+                icon: Users,
+            },
+        ],
     },
     {
-        title: 'Categorías',
-        href: categories.index(),
-        icon: Tag,
+        title: 'Catálogo',
+        href: categories.index(), // Href por defecto (no se usa cuando hay subitems)
+        icon: Store,
+        items: [
+            {
+                title: 'Categorías',
+                href: categories.index(),
+                icon: Tag,
+            },
+            {
+                title: 'Productos',
+                href: products.index(),
+                icon: Package,
+            },
+        ],
     },
     {
-        title: 'Productos',
-        href: products.index(),
-        icon: Package,
+        title: 'Ventas',
+        href: orders.index(), // Href por defecto (no se usa cuando hay subitems)
+        icon: Receipt,
+        items: [
+            {
+                title: 'Órdenes',
+                href: orders.index(),
+                icon: ShoppingCart,
+            },
+        ],
     },
 ];
 
