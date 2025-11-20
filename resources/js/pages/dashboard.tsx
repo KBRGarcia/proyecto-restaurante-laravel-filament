@@ -7,9 +7,10 @@ import users from '@/routes/users';
 import categories from '@/routes/categories';
 import products from '@/routes/products';
 import orders from '@/routes/orders';
+import orderDetails from '@/routes/order-details';
 import { type BreadcrumbItem } from '@/types';
 import { Head, Link } from '@inertiajs/react';
-import { Users, ArrowRight, Tag, Package, ShoppingCart } from 'lucide-react';
+import { Users, ArrowRight, Tag, Package, ShoppingCart, FileText } from 'lucide-react';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -23,9 +24,9 @@ export default function Dashboard() {
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Dashboard" />
             <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
-                <div className="grid auto-rows-min gap-4 md:grid-cols-2 lg:grid-cols-4">
+                <div className="grid auto-rows-min gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
                     {/* Card de Usuarios */}
-                    <Card className="hover:shadow-lg transition-shadow">
+                    <Card className="hover:shadow-lg transition-all duration-300 ease-in-out">
                         <CardHeader>
                             <div className="flex items-center justify-between">
                                 <div className="flex size-12 items-center justify-center rounded-lg bg-primary/10">
@@ -48,7 +49,7 @@ export default function Dashboard() {
                     </Card>
 
                     {/* Card de Categorías */}
-                    <Card className="hover:shadow-lg transition-shadow">
+                    <Card className="hover:shadow-lg transition-all duration-300 ease-in-out">
                         <CardHeader>
                             <div className="flex items-center justify-between">
                                 <div className="flex size-12 items-center justify-center rounded-lg bg-orange-500/10">
@@ -71,7 +72,7 @@ export default function Dashboard() {
                     </Card>
 
                     {/* Card de Productos */}
-                    <Card className="hover:shadow-lg transition-shadow">
+                    <Card className="hover:shadow-lg transition-all duration-300 ease-in-out">
                         <CardHeader>
                             <div className="flex items-center justify-between">
                                 <div className="flex size-12 items-center justify-center rounded-lg bg-green-500/10">
@@ -94,7 +95,7 @@ export default function Dashboard() {
                     </Card>
 
                     {/* Card de Órdenes */}
-                    <Card className="hover:shadow-lg transition-shadow">
+                    <Card className="hover:shadow-lg transition-all duration-300 ease-in-out">
                         <CardHeader>
                             <div className="flex items-center justify-between">
                                 <div className="flex size-12 items-center justify-center rounded-lg bg-blue-500/10">
@@ -110,6 +111,29 @@ export default function Dashboard() {
                             <Link href={orders.index().url}>
                                 <Button className="w-full">
                                     Ver Órdenes
+                                    <ArrowRight className="ml-2 size-4" />
+                                </Button>
+                            </Link>
+                        </CardContent>
+                    </Card>
+
+                    {/* Card de Detalles de Órdenes */}
+                    <Card className="hover:shadow-lg transition-all duration-300 ease-in-out">
+                        <CardHeader>
+                            <div className="flex items-center justify-between">
+                                <div className="flex size-12 items-center justify-center rounded-lg bg-purple-500/10">
+                                    <FileText className="size-6 text-purple-500" />
+                                </div>
+                            </div>
+                            <CardTitle className="mt-4">Detalles de Órdenes</CardTitle>
+                            <CardDescription>
+                                Gestiona los productos de cada orden
+                            </CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            <Link href={orderDetails.index().url}>
+                                <Button className="w-full">
+                                    Ver Detalles
                                     <ArrowRight className="ml-2 size-4" />
                                 </Button>
                             </Link>

@@ -13,12 +13,13 @@ import {
 import { dashboard } from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid, Users, Tag, Package, ShoppingCart, Settings, Store, Receipt } from 'lucide-react';
+import { BookOpen, Folder, LayoutGrid, Users, Tag, Package, ShoppingCart, Settings, Store, Receipt, FileText } from 'lucide-react';
 import AppLogo from './app-logo';
 import users from '@/routes/users';
 import categories from '@/routes/categories';
 import products from '@/routes/products';
 import orders from '@/routes/orders';
+import orderDetails from '@/routes/order-details';
 
 const mainNavItems: NavItem[] = [
     {
@@ -64,6 +65,11 @@ const mainNavItems: NavItem[] = [
                 title: 'Órdenes',
                 href: orders.index(),
                 icon: ShoppingCart,
+            },
+            {
+                title: 'Detalles de Órdenes',
+                href: orderDetails.index(),
+                icon: FileText,
             },
         ],
     },

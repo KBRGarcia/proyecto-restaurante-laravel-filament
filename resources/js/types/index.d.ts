@@ -159,3 +159,36 @@ export interface Order {
     updated_at: string;
     [key: string]: unknown;
 }
+
+export interface OrderDetail {
+    id: number;
+    order_id: number;
+    order_number: number | null;
+    order?: {
+        id: number;
+        user_name: string;
+        status: string;
+        service_type: string;
+        total: string | number;
+        order_date: string;
+    };
+    product_id: number;
+    product_name: string;
+    product?: {
+        id: number;
+        name: string;
+        description: string | null;
+        price: string | number;
+        image: string | null;
+        category_name: string | null;
+    };
+    quantity: number;
+    unit_price: string | number;
+    unit_price_formatted: string;
+    subtotal: string | number;
+    subtotal_formatted: string;
+    product_notes: string | null;
+    created_at: string;
+    updated_at: string;
+    [key: string]: unknown;
+}
