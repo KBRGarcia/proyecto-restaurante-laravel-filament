@@ -6,9 +6,10 @@ import { dashboard } from '@/routes';
 import users from '@/routes/users';
 import categories from '@/routes/categories';
 import products from '@/routes/products';
+import orders from '@/routes/orders';
 import { type BreadcrumbItem } from '@/types';
 import { Head, Link } from '@inertiajs/react';
-import { Users, ArrowRight, Tag, Package } from 'lucide-react';
+import { Users, ArrowRight, Tag, Package, ShoppingCart } from 'lucide-react';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -22,7 +23,7 @@ export default function Dashboard() {
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Dashboard" />
             <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
-                <div className="grid auto-rows-min gap-4 md:grid-cols-3">
+                <div className="grid auto-rows-min gap-4 md:grid-cols-2 lg:grid-cols-4">
                     {/* Card de Usuarios */}
                     <Card className="hover:shadow-lg transition-shadow">
                         <CardHeader>
@@ -86,6 +87,29 @@ export default function Dashboard() {
                             <Link href={products.index().url}>
                                 <Button className="w-full">
                                     Ver Productos
+                                    <ArrowRight className="ml-2 size-4" />
+                                </Button>
+                            </Link>
+                        </CardContent>
+                    </Card>
+
+                    {/* Card de Órdenes */}
+                    <Card className="hover:shadow-lg transition-shadow">
+                        <CardHeader>
+                            <div className="flex items-center justify-between">
+                                <div className="flex size-12 items-center justify-center rounded-lg bg-blue-500/10">
+                                    <ShoppingCart className="size-6 text-blue-500" />
+                                </div>
+                            </div>
+                            <CardTitle className="mt-4">Gestión de Órdenes</CardTitle>
+                            <CardDescription>
+                                Administra las órdenes del sistema
+                            </CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            <Link href={orders.index().url}>
+                                <Button className="w-full">
+                                    Ver Órdenes
                                     <ArrowRight className="ml-2 size-4" />
                                 </Button>
                             </Link>

@@ -23,6 +23,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Rutas de recursos para productos
     Route::resource('products', \App\Http\Controllers\ProductController::class);
+
+    // Rutas de recursos para órdenes
+    Route::resource('orders', \App\Http\Controllers\OrderController::class);
 });
 
 require __DIR__.'/settings.php';

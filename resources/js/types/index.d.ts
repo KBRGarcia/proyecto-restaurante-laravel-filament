@@ -108,3 +108,53 @@ export interface Product {
     updated_at: string;
     [key: string]: unknown;
 }
+
+export interface Order {
+    id: number;
+    user_id: number;
+    user_name: string;
+    user?: {
+        id: number;
+        name: string;
+        last_name: string;
+        full_name: string;
+        email: string;
+        phone_number: string | null;
+    };
+    status: 'pending' | 'preparing' | 'ready' | 'delivered' | 'canceled';
+    status_label: string;
+    service_type: 'delivery' | 'pickup';
+    service_type_label: string;
+    subtotal: string | number;
+    taxes: string | number;
+    total: string | number;
+    delivery_address: string | null;
+    contact_phone: string | null;
+    special_notes: string | null;
+    payment_method: string | null;
+    currency: 'nacional' | 'internacional';
+    currency_label: string;
+    national_payment_data: any | null;
+    order_date: string;
+    order_date_formatted: string | null;
+    estimated_delivery_date: string | null;
+    estimated_delivery_date_formatted: string | null;
+    assigned_employee_id: number | null;
+    assigned_employee_name: string | null;
+    assigned_employee?: {
+        id: number;
+        name: string;
+        last_name: string;
+        full_name: string;
+        email: string;
+    };
+    pending_date: string | null;
+    preparing_date: string | null;
+    ready_date: string | null;
+    on_the_way_date: string | null;
+    delivered_date: string | null;
+    canceled_date: string | null;
+    created_at: string;
+    updated_at: string;
+    [key: string]: unknown;
+}

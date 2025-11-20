@@ -15,11 +15,13 @@ class DatabaseSeeder extends Seeder
     {
         // Ejecutar los seeders en el orden correcto
         // Importante: CategorySeeder debe ejecutarse antes que ProductSeeder
-        // debido a la relación de foreign key
+        // y UserSeeder debe ejecutarse antes que OrderSeeder
+        // debido a las relaciones de foreign key
         $this->call([
             UserSeeder::class,
             CategorySeeder::class,
             ProductSeeder::class,
+            OrderSeeder::class,
         ]);
     }
 }

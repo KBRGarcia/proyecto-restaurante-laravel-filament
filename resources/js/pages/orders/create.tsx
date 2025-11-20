@@ -1,15 +1,16 @@
 import AppLayout from '@/layouts/app-layout';
-import { type BreadcrumbItem, type Product } from '@/types';
+import { type BreadcrumbItem } from '@/types';
 import { Head, Link, router, useForm } from '@inertiajs/react';
 import { dashboard } from '@/routes';
-import products from '@/routes/products';
+import orders from '@/routes/orders';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { AlertCircle, ArrowLeft, Save, Edit as EditIcon } from 'lucide-react';
+import { AlertCircle, ArrowLeft, Save, ShoppingCart } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import { useEffect } from 'react';
 
 interface FormField {
     name: string;
@@ -22,81 +23,63 @@ interface FormField {
     help_text?: string;
     show_on_edit?: boolean;
     options?: { value: string; label: string }[];
-    default?: string | number | boolean;
+    default?: string;
     rows?: number;
-    accept?: string;
     step?: string;
 }
 
-interface ProductEditProps {
-    product: Product;
+interface OrderCreateProps {
     fields: FormField[];
+    users: { value: number; label: string }[];
+    employees: { value: number; label: string }[];
 }
 
-export default function ProductEdit({ product, fields }: ProductEditProps) {
-    // Verificar que product existe
-    if (!product) {
-        return (
-            <AppLayout breadcrumbs={[]}>
-                <Head title="Error" />
-                <div className="flex h-full flex-1 flex-col items-center justify-center p-4">
-                    <p className="text-lg text-muted-foreground">Producto no encontrado</p>
-                </div>
-            </AppLayout>
-        );
-    }
+const breadcrumbs: BreadcrumbItem[] = [
+    {
+        title: 'Dashboard',
+        href: dashboard().url,
+    },
+    {
+        title: 'Órdenes',
+        href: orders.index().url,
+    },
+    {
+        title: 'Crear Orden',
+        href: orders.create().url,
+    },
+];
 
-    const breadcrumbs: BreadcrumbItem[] = [
-        {
-            title: 'Dashboard',
-            href: dashboard().url,
-        },
-        {
-            title: 'Productos',
-            href: products.index().url,
-        },
-        {
-            title: 'Editar Producto',
-            href: products.edit(product.id).url,
-        },
-    ];
-
-    const { data, setData, put, processing, errors } = useForm({
-        name: product.name || '',
-        description: product.description || '',
-        price: product.price || '',
-        category_id: product.category_id || '',
-        image: null as File | null,
-        status: product.status || 'active',
-        preparation_time: product.preparation_time || 15,
-        ingredients: product.ingredients || '',
-        is_special: product.is_special || false,
+export default function OrderCreate({ fields, users, employees }: OrderCreateProps) {
+    const { data, setData, post, processing, errors } = useForm({
+        user_id: '',
+        assigned_employee_id: '',
+        status: 'pending',
+        service_type: 'delivery',
+        currency: 'internacional',
+        subtotal: '',
+        taxes: '0',
+        total: '',
+        delivery_address: '',
+        contact_phone: '',
+        special_notes: '',
+        payment_method: '',
+        estimated_delivery_date: '',
     });
+
+    // Auto-calcular el total cuando cambian subtotal o taxes
+    useEffect(() => {
+        const subtotal = parseFloat(data.subtotal) || 0;
+        const taxes = parseFloat(data.taxes) || 0;
+        const total = (subtotal + taxes).toFixed(2);
+        setData('total', total);
+    }, [data.subtotal, data.taxes]);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        
-        // Si hay una imagen, usar POST con _method=PUT
-        if (data.image) {
-            router.post(products.update(product.id).url, {
-                ...data,
-                _method: 'PUT',
-            } as any, {
-                forceFormData: true,
-            });
-        } else {
-            put(products.update(product.id).url);
-        }
-    };
-
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files && e.target.files[0]) {
-            setData('image', e.target.files[0]);
-        }
+        post(orders.store().url);
     };
 
     const renderField = (field: FormField) => {
-        // Mapear grid_cols a clases completas de Tailwind para que funcionen correctamente
         const gridColsMap: Record<number, string> = {
             1: 'col-span-1',
             2: 'col-span-2',
@@ -114,6 +97,16 @@ export default function ProductEdit({ product, fields }: ProductEditProps) {
         const gridClass = field.grid_cols ? gridColsMap[field.grid_cols] : 'col-span-12';
         const value = data[field.name as keyof typeof data] ?? '';
 
+        // Agregar opciones dinámicas para user_id y assigned_employee_id
+        if (field.name === 'user_id') {
+            field.options = users.map(u => ({ value: u.value.toString(), label: u.label }));
+        } else if (field.name === 'assigned_employee_id') {
+            field.options = [
+                { value: '', label: 'Sin asignar' },
+                ...employees.map(e => ({ value: e.value.toString(), label: e.label }))
+            ];
+        }
+
         switch (field.type) {
             case 'text':
                 return (
@@ -124,7 +117,7 @@ export default function ProductEdit({ product, fields }: ProductEditProps) {
                         </Label>
                         <Input
                             id={field.name}
-                            type={field.type}
+                            type="text"
                             placeholder={field.placeholder}
                             value={value as string}
                             onChange={(e) => setData(field.name as any, e.target.value)}
@@ -154,12 +147,12 @@ export default function ProductEdit({ product, fields }: ProductEditProps) {
                             type="number"
                             placeholder={field.placeholder}
                             value={value as string | number}
-                            onChange={(e) => {
-                                setData(field.name as any, e.target.value);
-                            }}
+                            onChange={(e) => setData(field.name as any, e.target.value)}
                             className={errors[field.name as keyof typeof errors] ? 'border-destructive' : ''}
+                            step={field.step || '1'}
+                            min="0"
                             required={field.required}
-                            step={field.step}
+                            disabled={field.name === 'total'} // Total es calculado automáticamente
                         />
                         {errors[field.name as keyof typeof errors] && (
                             <p className="text-sm text-destructive mt-1">
@@ -229,60 +222,25 @@ export default function ProductEdit({ product, fields }: ProductEditProps) {
                     </div>
                 );
 
-            case 'checkbox':
-                return (
-                    <div key={field.name} className={gridClass}>
-                        <div className="flex items-center space-x-2">
-                            <input
-                                id={field.name}
-                                type="checkbox"
-                                checked={value as boolean}
-                                onChange={(e) => setData(field.name as any, e.target.checked)}
-                                className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
-                            />
-                            <Label htmlFor={field.name} className="font-normal">
-                                {field.label}
-                            </Label>
-                        </div>
-                        {errors[field.name as keyof typeof errors] && (
-                            <p className="text-sm text-destructive mt-1">
-                                {errors[field.name as keyof typeof errors]}
-                            </p>
-                        )}
-                    </div>
-                );
-
-            case 'file':
+            case 'datetime-local':
                 return (
                     <div key={field.name} className={gridClass}>
                         <Label htmlFor={field.name}>
                             {field.label}
                             {field.required && <span className="text-destructive ml-1">*</span>}
                         </Label>
-                        {product.image && (
-                            <div className="mb-2">
-                                <img 
-                                    src={product.image} 
-                                    alt="Imagen actual" 
-                                    className="h-20 w-20 rounded object-cover"
-                                />
-                                <p className="text-xs text-muted-foreground mt-1">Imagen actual</p>
-                            </div>
-                        )}
                         <Input
                             id={field.name}
-                            type="file"
-                            accept={field.accept}
-                            onChange={handleFileChange}
+                            type="datetime-local"
+                            value={value as string}
+                            onChange={(e) => setData(field.name as any, e.target.value)}
                             className={errors[field.name as keyof typeof errors] ? 'border-destructive' : ''}
+                            required={field.required}
                         />
                         {errors[field.name as keyof typeof errors] && (
                             <p className="text-sm text-destructive mt-1">
                                 {errors[field.name as keyof typeof errors]}
                             </p>
-                        )}
-                        {field.help_text && !errors[field.name as keyof typeof errors] && (
-                            <p className="text-sm text-muted-foreground mt-1">{field.help_text}</p>
                         )}
                     </div>
                 );
@@ -294,7 +252,7 @@ export default function ProductEdit({ product, fields }: ProductEditProps) {
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title={`Editar Producto - ${product.name}`} />
+            <Head title="Crear Orden" />
             
             <div className="flex h-full flex-1 flex-col gap-4 p-4">
                 <Card>
@@ -302,14 +260,14 @@ export default function ProductEdit({ product, fields }: ProductEditProps) {
                         <div className="flex items-center justify-between">
                             <div>
                                 <CardTitle className="flex items-center gap-2">
-                                    <EditIcon className="size-5" />
-                                    Editar Producto: {product.name}
+                                    <ShoppingCart className="size-5" />
+                                    Crear Nueva Orden
                                 </CardTitle>
                                 <CardDescription>
-                                    Modifique los datos del producto en el formulario
+                                    Complete el formulario para crear una nueva orden en el sistema
                                 </CardDescription>
                             </div>
-                            <Link href={products.index().url}>
+                            <Link href={orders.index().url}>
                                 <Button variant="outline">
                                     <ArrowLeft className="mr-2 size-4" />
                                     Volver
@@ -333,7 +291,7 @@ export default function ProductEdit({ product, fields }: ProductEditProps) {
                             </div>
 
                             <div className="mt-6 flex items-center justify-end gap-3">
-                                <Link href={products.index().url}>
+                                <Link href={orders.index().url}>
                                     <Button type="button" variant="outline">
                                         Cancelar
                                     </Button>
@@ -341,12 +299,12 @@ export default function ProductEdit({ product, fields }: ProductEditProps) {
                                 <Button type="submit" disabled={processing}>
                                     {processing ? (
                                         <>
-                                            <span className="mr-2">Actualizando...</span>
+                                            <span className="mr-2">Creando...</span>
                                         </>
                                     ) : (
                                         <>
                                             <Save className="mr-2 size-4" />
-                                            Actualizar Producto
+                                            Crear Orden
                                         </>
                                     )}
                                 </Button>
