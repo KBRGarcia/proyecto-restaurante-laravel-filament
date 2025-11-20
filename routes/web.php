@@ -32,6 +32,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Rutas de recursos para evaluaciones
     Route::resource('evaluations', \App\Http\Controllers\EvaluationController::class);
+
+    // Rutas de recursos para métodos de pago
+    Route::resource('payment-methods', \App\Http\Controllers\PaymentMethodController::class);
 });
 
 require __DIR__.'/settings.php';

@@ -230,3 +230,19 @@ export interface Evaluation {
     updated_at: string;
     [key: string]: unknown;
 }
+
+export interface PaymentMethod {
+    id: number;
+    code: string;
+    name: string;
+    currency_type: 'nacional' | 'internacional';
+    currency_type_label: string;
+    active: boolean;
+    active_label: string;
+    configuration: any | null;
+    creation_date: string;
+    update_date: string;
+    created_at: string;
+    updated_at: string;
+    [key: string]: unknown;
+}
