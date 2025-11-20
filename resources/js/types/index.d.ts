@@ -192,3 +192,41 @@ export interface OrderDetail {
     updated_at: string;
     [key: string]: unknown;
 }
+
+export interface Evaluation {
+    id: number;
+    user_id: number;
+    user_name: string | null;
+    user?: {
+        id: number;
+        name: string;
+        last_name: string;
+        full_name: string;
+        email: string;
+    };
+    order_id: number | null;
+    order_number: number | null;
+    order?: {
+        id: number;
+        user_name: string;
+        status: string;
+        total: string | number;
+        order_date: string;
+    };
+    product_id: number | null;
+    product_name: string | null;
+    product?: {
+        id: number;
+        name: string;
+        description: string | null;
+        price: string | number;
+        image: string | null;
+    };
+    rating: number;
+    comment: string | null;
+    evaluation_date: string;
+    evaluation_date_formatted: string;
+    created_at: string;
+    updated_at: string;
+    [key: string]: unknown;
+}

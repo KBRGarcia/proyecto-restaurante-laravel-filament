@@ -81,6 +81,14 @@ class Product extends Model
     }
 
     /**
+     * Get the evaluations for the product.
+     */
+    public function evaluations(): HasMany
+    {
+        return $this->hasMany(Evaluation::class);
+    }
+
+    /**
      * Scope a query to only include active products.
      */
     public function scopeActive(Builder $query): Builder

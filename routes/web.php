@@ -29,6 +29,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Rutas de recursos para detalles de órdenes
     Route::resource('order-details', \App\Http\Controllers\OrderDetailController::class);
+
+    // Rutas de recursos para evaluaciones
+    Route::resource('evaluations', \App\Http\Controllers\EvaluationController::class);
 });
 
 require __DIR__.'/settings.php';

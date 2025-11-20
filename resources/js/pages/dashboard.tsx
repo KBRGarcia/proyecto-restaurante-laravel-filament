@@ -8,9 +8,10 @@ import categories from '@/routes/categories';
 import products from '@/routes/products';
 import orders from '@/routes/orders';
 import orderDetails from '@/routes/order-details';
+import evaluations from '@/routes/evaluations';
 import { type BreadcrumbItem } from '@/types';
 import { Head, Link } from '@inertiajs/react';
-import { Users, ArrowRight, Tag, Package, ShoppingCart, FileText } from 'lucide-react';
+import { Users, ArrowRight, Tag, Package, ShoppingCart, FileText, Star } from 'lucide-react';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -131,6 +132,29 @@ function DashboardContent() {
                     <Link href={orderDetails.index().url}>
                         <Button className="w-full">
                             Ver Detalles
+                            <ArrowRight className="ml-2 size-4" />
+                        </Button>
+                    </Link>
+                </CardContent>
+            </Card>
+
+            {/* Card de Evaluaciones */}
+            <Card className="hover:shadow-lg transition-shadow">
+                <CardHeader>
+                    <div className="flex items-center justify-between">
+                        <div className="flex size-12 items-center justify-center rounded-lg bg-yellow-500/10">
+                            <Star className="size-6 text-yellow-500" />
+                        </div>
+                    </div>
+                    <CardTitle className="mt-4">Evaluaciones</CardTitle>
+                    <CardDescription>
+                        Gestiona las evaluaciones y comentarios
+                    </CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <Link href={evaluations.index().url}>
+                        <Button className="w-full">
+                            Ver Evaluaciones
                             <ArrowRight className="ml-2 size-4" />
                         </Button>
                     </Link>
