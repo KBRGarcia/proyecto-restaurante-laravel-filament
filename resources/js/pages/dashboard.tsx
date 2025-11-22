@@ -11,9 +11,10 @@ import orderDetails from '@/routes/order-details';
 import evaluations from '@/routes/evaluations';
 import paymentMethods from '@/routes/payment-methods';
 import venezuelaBanks from '@/routes/venezuela-banks';
+import physicalPaymentOrders from '@/routes/physical-payment-orders';
 import { type BreadcrumbItem } from '@/types';
 import { Head, Link } from '@inertiajs/react';
-import { Users, ArrowRight, Tag, Package, ShoppingCart, FileText, Star, CreditCard, Building2 } from 'lucide-react';
+import { Users, ArrowRight, Tag, Package, ShoppingCart, FileText, Star, CreditCard, Building2, Receipt } from 'lucide-react';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -203,6 +204,29 @@ function DashboardContent() {
                     <Link href={venezuelaBanks.index().url}>
                         <Button className="w-full">
                             Ver Bancos
+                            <ArrowRight className="ml-2 size-4" />
+                        </Button>
+                    </Link>
+                </CardContent>
+            </Card>
+
+            {/* Card de Órdenes de Pago Físico */}
+            <Card className="hover:shadow-lg transition-shadow">
+                <CardHeader>
+                    <div className="flex items-center justify-between">
+                        <div className="flex size-12 items-center justify-center rounded-lg bg-teal-500/10">
+                            <Receipt className="size-6 text-teal-500" />
+                        </div>
+                    </div>
+                    <CardTitle className="mt-4">Órdenes de Pago Físico</CardTitle>
+                    <CardDescription>
+                        Gestiona las órdenes pendientes de pago físico
+                    </CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <Link href={physicalPaymentOrders.index().url}>
+                        <Button className="w-full">
+                            Ver Órdenes
                             <ArrowRight className="ml-2 size-4" />
                         </Button>
                     </Link>

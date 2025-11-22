@@ -23,6 +23,7 @@ import orderDetails from '@/routes/order-details';
 import evaluations from '@/routes/evaluations';
 import paymentMethods from '@/routes/payment-methods';
 import venezuelaBanks from '@/routes/venezuela-banks';
+import physicalPaymentOrders from '@/routes/physical-payment-orders';
 
 const mainNavItems: NavItem[] = [
     {
@@ -95,6 +96,11 @@ const mainNavItems: NavItem[] = [
                 title: 'Bancos de Venezuela',
                 href: venezuelaBanks.index(),
                 icon: Building2,
+            },
+            {
+                title: 'Órdenes de Pago Físico',
+                href: physicalPaymentOrders.index(),
+                icon: Receipt,
             },
         ],
     },

@@ -130,6 +130,14 @@ class Order extends Model
     }
 
     /**
+     * Get the physical payment orders for the order.
+     */
+    public function physicalPaymentOrders(): HasMany
+    {
+        return $this->hasMany(PhysicalPaymentOrders::class, 'order_id');
+    }
+
+    /**
      * Scope a query to only include pending orders.
      */
     public function scopePending(Builder $query): Builder

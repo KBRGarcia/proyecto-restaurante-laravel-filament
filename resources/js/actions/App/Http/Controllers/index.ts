@@ -6,6 +6,7 @@ import OrderDetailController from './OrderDetailController'
 import EvaluationController from './EvaluationController'
 import PaymentMethodController from './PaymentMethodController'
 import VenezuelaBankController from './VenezuelaBankController'
+import PhysicalPaymentOrdersController from './PhysicalPaymentOrdersController'
 import Settings from './Settings'
 const Controllers = {
     UserController: Object.assign(UserController, UserController),
@@ -16,6 +17,7 @@ OrderDetailController: Object.assign(OrderDetailController, OrderDetailControlle
 EvaluationController: Object.assign(EvaluationController, EvaluationController),
 PaymentMethodController: Object.assign(PaymentMethodController, PaymentMethodController),
 VenezuelaBankController: Object.assign(VenezuelaBankController, VenezuelaBankController),
+PhysicalPaymentOrdersController: Object.assign(PhysicalPaymentOrdersController, PhysicalPaymentOrdersController),
 Settings: Object.assign(Settings, Settings),
 }
 
