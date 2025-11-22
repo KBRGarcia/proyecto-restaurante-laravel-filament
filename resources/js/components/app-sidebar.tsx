@@ -13,7 +13,7 @@ import {
 import { dashboard } from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid, Users, Tag, Package, ShoppingCart, Settings, Store, Receipt, FileText, Star, CreditCard } from 'lucide-react';
+import { BookOpen, Folder, LayoutGrid, Users, Tag, Package, ShoppingCart, Settings, Store, Receipt, FileText, Star, CreditCard, Building2 } from 'lucide-react';
 import AppLogo from './app-logo';
 import users from '@/routes/users';
 import categories from '@/routes/categories';
@@ -22,6 +22,7 @@ import orders from '@/routes/orders';
 import orderDetails from '@/routes/order-details';
 import evaluations from '@/routes/evaluations';
 import paymentMethods from '@/routes/payment-methods';
+import venezuelaBanks from '@/routes/venezuela-banks';
 
 const mainNavItems: NavItem[] = [
     {
@@ -90,21 +91,12 @@ const mainNavItems: NavItem[] = [
                 href: paymentMethods.index(),
                 icon: CreditCard,
             },
+            {
+                title: 'Bancos de Venezuela',
+                href: venezuelaBanks.index(),
+                icon: Building2,
+            },
         ],
-        
-    },
-];
-
-const footerNavItems: NavItem[] = [
-    {
-        title: 'Repository',
-        href: 'https://github.com/laravel/react-starter-kit',
-        icon: Folder,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#react',
-        icon: BookOpen,
     },
 ];
 
@@ -128,7 +120,6 @@ export function AppSidebar() {
             </SidebarContent>
 
             <SidebarFooter>
-                <NavFooter items={footerNavItems} className="mt-auto" />
                 <NavUser />
             </SidebarFooter>
         </Sidebar>
