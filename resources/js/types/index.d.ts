@@ -262,3 +262,32 @@ export interface VenezuelaBank {
     updated_at_formatted: string | null;
     [key: string]: unknown;
 }
+
+export interface PhysicalPaymentOrder {
+    id: number;
+    order_id: number;
+    order_number: number | null;
+    order?: {
+        id: number;
+        user_name: string;
+        status: string;
+        service_type: string;
+        total: string | number;
+        currency: string;
+        order_date: string;
+    };
+    limit_date: string;
+    limit_date_formatted: string | null;
+    status: string;
+    status_label: string;
+    is_expired: boolean;
+    creation_date: string;
+    creation_date_formatted: string | null;
+    update_date: string;
+    update_date_formatted: string | null;
+    created_at: string;
+    created_at_formatted: string | null;
+    updated_at: string;
+    updated_at_formatted: string | null;
+    [key: string]: unknown;
+}

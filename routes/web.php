@@ -38,6 +38,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Rutas de recursos para bancos de Venezuela
     Route::resource('venezuela-banks', \App\Http\Controllers\VenezuelaBankController::class);
+
+    // Rutas de recursos para órdenes de pago físico
+    Route::resource('physical-payment-orders', \App\Http\Controllers\PhysicalPaymentOrdersController::class);
 });
 
 require __DIR__.'/settings.php';
